@@ -1,0 +1,19 @@
+# pyproject.toml - Configuration for development tools
+# Sets up code formatting (black), linting (ruff), and coverage reporting
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.coverage.run]
+source = ["app"]
+
+[tool.coverage.report]
+show_missing = true

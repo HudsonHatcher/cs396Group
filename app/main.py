@@ -1,0 +1,1 @@
+#Entry point: defines FastAPI app, routes (/, /health, etc.)
