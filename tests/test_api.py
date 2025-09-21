@@ -229,4 +229,3 @@ class TestAPIErrorHandling:
             "/calc/summarize", data="invalid json{", headers={"Content-Type": "application/json"}
         )
         assert response.status_code == 422
-    
