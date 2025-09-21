@@ -26,7 +26,7 @@ class SummarizeRequest(BaseModel):
 
     @field_validator("values")
     @classmethod
-    def validate_values_strict(cls, v):
+    def validate_values_strict(cls, v: list) -> list[float]:
         """Ensure values are strictly numeric, rejecting string coercion."""
         if not isinstance(v, list):
             raise ValueError("Values must be a list")
@@ -57,7 +57,7 @@ class HealthResponse(BaseModel):
 
 
 @app.get("/", response_model=dict)
-async def root():
+async def root() -> dict[str, str | list[str]]:
     """Root endpoint providing API information."""
     return {
         "message": "Calculation Service API",
@@ -67,7 +67,7 @@ async def root():
 
 
 @app.get("/health", response_model=HealthResponse)
-async def health_check():
+async def health_check() -> HealthResponse:
     """
     Health check endpoint.
 
@@ -82,7 +82,7 @@ async def health_check():
 
 
 @app.post("/calc/summarize", response_model=SummarizeResponse)
-async def calculate_summary(request: SummarizeRequest):
+async def calculate_summary(request: SummarizeRequest) -> SummarizeResponse:
     """
     Calculate summary statistics for a list of numbers.
 
