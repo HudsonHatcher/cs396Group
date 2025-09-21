@@ -1,0 +1,38 @@
+# Docker Compose configuration for local development
+# Provides easy setup for running the application and potential future services
+
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./app:/app/app
+    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Future services can be added here
+  # database:
+  #   image: postgres:15
+  #   environment:
+  #     POSTGRES_DB: calculation_service
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+
+# volumes:
+#   postgres_data:
