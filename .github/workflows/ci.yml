@@ -58,10 +58,10 @@ jobs:
         fail_ci_if_error: true
     
     - name: Upload coverage artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: coverage-report
-        path: coverage.xml
+  uses: actions/upload-artifact@v4
+  with:
+    name: coverage-report
+    path: coverage.xml
 
   security:
     runs-on: ubuntu-latest
